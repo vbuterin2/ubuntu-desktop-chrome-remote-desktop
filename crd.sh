@@ -8,12 +8,6 @@
 function install_desktop_env {
   PACKAGES="desktop-base xscreensaver"
 
-  if [[ "$INSTALL_XFCE" != "yes" && "$INSTALL_CINNAMON" != "yes" ]] ; then
-    # neither XFCE nor cinnamon specified; install both
-    INSTALL_XFCE=yes
-    INSTALL_CINNAMON=yes
-  fi
-
   if [[ "$INSTALL_XFCE" = "yes" ]] ; then
     PACKAGES="$PACKAGES xfce4"
     echo "exec xfce4-session" > /etc/chrome-remote-desktop-session
