@@ -1,4 +1,10 @@
 ```
+wget 
+```
+
+
+
+```sh
 #!/bin/bash -x
 #
 # Startup script to install Chrome remote desktop and a desktop environment.
@@ -20,6 +26,12 @@ function install_desktop_env {
     echo "exec xfce4-session" > /etc/chrome-remote-desktop-session
     [[ "$INSTALL_FULL_DESKTOP" = "yes" ]] && \
       PACKAGES="$PACKAGES task-xfce-desktop"
+  fi
+  
+  if [[ "$INSTALL_UBUNTU" = "yes" ]] ; then
+    PACKAGES="$PACKAGES ubuntu-desktop"
+    echo "export GNOME_SHELL_SESSION_MODE=ubuntu" > /etc/chrome-remote-desktop-session
+    echo "exec /etc/X11/Xsession /usr/bin/gnome-session" >> /etc/chrome-remote-desktop-session
   fi
 
   if [[ "$INSTALL_CINNAMON" = "yes" ]] ; then
@@ -47,8 +59,9 @@ function is_installed {  # args PACKAGE_NAME
 }
 
 # Configure the following environmental variables as required:
-INSTALL_XFCE=yes
-INSTALL_CINNAMON=yes
+INSTALL_XFCE=no
+INSTALL_CINNAMON=no
+INSTALL_UBUNTU=yes
 INSTALL_CHROME=yes
 INSTALL_FULL_DESKTOP=yes
 
