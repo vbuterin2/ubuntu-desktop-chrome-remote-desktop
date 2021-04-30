@@ -1,9 +1,6 @@
 #!/bin/bash -x
 #
-# Startup script to install Chrome remote desktop and a desktop environment.
-#
-# See environmental variables at then end of the script for configuration
-#
+# This script should only be used in ubuntu
 
 function install_desktop_env {
   PACKAGES="desktop-base xscreensaver"
@@ -11,8 +8,8 @@ function install_desktop_env {
   if [[ "$INSTALL_XFCE" = "yes" ]] ; then
     PACKAGES="$PACKAGES xfce4"
     echo "exec xfce4-session" > /etc/chrome-remote-desktop-session
-    [[ "$INSTALL_FULL_DESKTOP" = "yes" ]] && \
-      PACKAGES="$PACKAGES task-xfce-desktop"
+#     [[ "$INSTALL_FULL_DESKTOP" = "yes" ]] && \
+#       PACKAGES="$PACKAGES task-xfce-desktop"
   fi
   
   if [[ "$INSTALL_UBUNTU" = "yes" ]] ; then
@@ -24,8 +21,8 @@ function install_desktop_env {
   if [[ "$INSTALL_CINNAMON" = "yes" ]] ; then
     PACKAGES="$PACKAGES cinnamon-core"
     echo "exec cinnamon-session-cinnamon2d" > /etc/chrome-remote-desktop-session
-    [[ "$INSTALL_FULL_DESKTOP" = "yes" ]] && \
-      PACKAGES="$PACKAGES task-cinnamon-desktop"
+#     [[ "$INSTALL_FULL_DESKTOP" = "yes" ]] && \
+#       PACKAGES="$PACKAGES task-cinnamon-desktop"
   fi
 
   DEBIAN_FRONTEND=noninteractive \
@@ -46,9 +43,9 @@ function is_installed {  # args PACKAGE_NAME
 }
 
 # Configure the following environmental variables as required:
-INSTALL_XFCE=no
+INSTALL_XFCE=yes
 INSTALL_CINNAMON=no
-INSTALL_UBUNTU=yes
+INSTALL_UBUNTU=no
 INSTALL_CHROME=yes
 INSTALL_FULL_DESKTOP=yes
 
