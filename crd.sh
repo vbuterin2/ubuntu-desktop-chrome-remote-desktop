@@ -30,8 +30,6 @@ function install_desktop_env {
     apt-get install --assume-yes $PACKAGES $EXTRA_PACKAGES
   
   # purge unnecessary and time consuming install steps
-  DEBIAN_FRONTEND=noninteractive \
-    apt-get purge --assume-yes $PACKAGES_TO_PURGE
 
   systemctl disable lightdm.service
 }
