@@ -4,6 +4,7 @@
 
 function install_desktop_env {
   PACKAGES="desktop-base xscreensaver"
+  PACKAGES_TO_PURGE="man-db"
 
   if [[ "$INSTALL_XFCE" = "yes" ]] ; then
     PACKAGES="$PACKAGES xfce4"
@@ -27,6 +28,9 @@ function install_desktop_env {
 
   DEBIAN_FRONTEND=noninteractive \
     apt-get install --assume-yes $PACKAGES $EXTRA_PACKAGES
+  
+  DEBIAN_FRONTEND=noninteractive \
+    apt-get purge --assume-yes $PACKAGES_TO_PURGE
 
   systemctl disable lightdm.service
 }
