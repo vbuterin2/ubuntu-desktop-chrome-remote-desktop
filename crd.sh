@@ -29,6 +29,7 @@ function install_desktop_env {
   DEBIAN_FRONTEND=noninteractive \
     apt-get install --assume-yes $PACKAGES $EXTRA_PACKAGES
   
+  # purge unnecessary and time consuming install steps
   DEBIAN_FRONTEND=noninteractive \
     apt-get purge --assume-yes $PACKAGES_TO_PURGE
 
