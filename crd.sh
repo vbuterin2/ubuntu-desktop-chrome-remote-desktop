@@ -2,6 +2,58 @@
 #
 # This script should only be used in ubuntu
 
+
+function install_visual_studio_code {
+  sudo snap install code --classic
+}
+
+function install_oh_my_zsh {
+  PACKAGES="git zsh curl wget"
+  
+  DEBIAN_FRONTEND=noninteractive \
+    apt-get install --assume-yes $PACKAGES
+    
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+  
+  echo "oh my zsh installation complete."
+  
+}
+
+function install_office_tools {
+  PAKCAGES="libreoffice"
+  
+  DEBIAN_FRONTEND=noninteractive \
+    apt-get install --assume-yes $PACKAGES
+    
+  echo "Office tools installation complete."
+} 
+
+function install_fonts {
+  PACKAGES="fonts-wqy-microhei"
+  
+  DEBIAN_FRONTEND=noninteractive \
+    apt-get install --assume-yes $PACKAGES
+    
+  echo "CN Fonts installation complete."
+} 
+  
+
+function install_im_tools {
+  PACKAGES="telegram-desktop"
+  
+  DEBIAN_FRONTEND=noninteractive \
+    apt-get install --assume-yes $PACKAGES
+    
+  echo "Common IM tools installation complete."
+}
+
+function install_essential_coding_tools {
+  PACKAGES="terminator"
+  
+  DEBIAN_FRONTEND=noninteractive \
+    apt-get install --assume-yes $PACKAGES
+}
+
 function install_desktop_env {
   PACKAGES="desktop-base xscreensaver"
   PACKAGES_TO_PURGE="man-db"
@@ -71,3 +123,17 @@ install_desktop_env
     /tmp/google-chrome-stable_current_amd64.deb
 
 echo "Chrome remote desktop installation completed"
+
+install_essential_coding_tools
+
+echo "Essential tools installation completed"
+
+install_im_tools
+
+install_fonts
+
+install_office_tools
+
+install_oh_my_zsh
+
+install_visual_studio_code
