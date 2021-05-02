@@ -2,6 +2,29 @@
 #
 # This script should only be used in ubuntu
 
+function install_unagi {
+  PACKAGES="unagi"
+
+
+  DEBIAN_FRONTEND=noninteractive \
+    apt-get install --assume-yes $PACKAGES
+
+  echo "unagi screen compositor installation completed."
+}
+
+function add_swap_space {
+   sudo fallocate -l $SWAP_SPACE $SWAP_LOCATION
+   sudo chmod 600 /swapfile
+   sudo mkswap /swapfile
+   sudo swapon /swapfile
+   sudo cp /etc/fstab /etc/fstab.bak
+
+   free -h
+
+   echo "Swap space of $SWAP_SPACE added at $SWAP_LOCATION. "
+
+}
+
 
 function install_visual_studio_code {
   sudo snap install code --classic
@@ -103,6 +126,8 @@ INSTALL_CINNAMON=no
 INSTALL_UBUNTU=no
 INSTALL_CHROME=yes
 INSTALL_FULL_DESKTOP=yes
+SWAP_SPACE=16G
+SWAP_LOCATION=/swapfile
 
 # Any additional packages that should be installed on startup can be added here
 EXTRA_PACKAGES="less bzip2 zip unzip"
@@ -137,3 +162,7 @@ install_office_tools
 install_oh_my_zsh
 
 install_visual_studio_code
+
+add_swap_space
+
+install_unagi
